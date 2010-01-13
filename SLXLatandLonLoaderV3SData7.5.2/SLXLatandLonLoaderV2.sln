@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SLXLatandLonLoaderV2", "SLXLatandLonLoaderV2\SLXLatandLonLoaderV2.vbproj", "{517C2B56-8C66-4AB0-8882-25F58EEF803E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{517C2B56-8C66-4AB0-8882-25F58EEF803E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{517C2B56-8C66-4AB0-8882-25F58EEF803E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{517C2B56-8C66-4AB0-8882-25F58EEF803E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{517C2B56-8C66-4AB0-8882-25F58EEF803E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

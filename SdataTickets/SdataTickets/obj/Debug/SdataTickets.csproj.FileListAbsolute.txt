@@ -1,0 +1,10 @@
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.frmMain.resources
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.Login.resources
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\bin\Debug\SdataTickets.exe
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\bin\Debug\SdataTickets.pdb
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.exe
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.pdb
+C:\Documents and Settings\Administrator\Desktop\SdataTickets\SdataTickets\obj\Debug\SdataTickets.QueryBuilder.resources

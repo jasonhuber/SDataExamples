@@ -1,0 +1,80 @@
+{
+	projectName: 'SData JavaScript Client',
+	licenseText: '',
+	deployDir: 'deploy/',
+	pkgs: [{
+		name: 'SData JavaScript Client',
+		file: 'sdata-client.js',
+		isDebug: true,
+		fileIncludes: [{
+		    text: 'SDataAjax.js',
+		    path: '../src/'
+		},{
+			text: 'SDataBaseRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataApplicationRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataResourceCollectionRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataNamedQueryRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataSingleResourceRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataSystemRequest.js',
+			path: '../src/'
+		},{
+			text: 'SDataTemplateResourceRequest.js',
+			path: '../src/'	
+		},{
+			text: 'SDataUri.js',
+			path: '../src/'
+		},{
+			text: 'SDataService.js',
+			path: '../src/'
+		}]
+	},{
+		name: 'SData JavaScript Client Dependencies',
+		file: 'sdata-client-dependencies.js',
+		isDebug: true,
+		fileIncludes: [{
+			text: 'Base64.js',
+			path: '../libraries/'
+		},{
+			text: 'ObjTree.js',
+			path: '../libraries/'
+		},{
+			text: 'sage.js',
+			path: '../libraries/sage/'
+		},{
+			text: 'class.js',
+			path: '../libraries/sage/'
+		},{
+			text: 'deferred.js',
+			path: '../libraries/sage/'
+		},{
+			text: 'event.js',
+			path: '../libraries/sage/'
+		},{
+			text: 'evented.js',
+			path: '../libraries/sage/'
+		}]
+	}],
+	resources: [{
+		src: '../src',
+		dest: 'src',
+		filters: ".*\\.js"
+	},{
+	    src: '../libraries',
+		dest: 'src/libraries',
+		filters: ".*[Base64|ObjTree|json2]"
+	},{
+	    src: '../libraries/sage',
+		dest: 'src/libraries/sage',
+		filters: ".*\\.js"
+	}]
+}

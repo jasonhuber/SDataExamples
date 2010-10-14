@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <script src="./dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+        <script type="text/javascript">
+            dojo.require("dijit.layout.TabContainer");
+            dojo.require("dijit.layout.ContentPane");
+        </script>
+        <link rel="stylesheet" type="text/css" href="./dijit/themes/claro/claro.css"/>
+		   <script type="text/javascript" src="../libraries/sage/sage.js"></script>
+			<script type="text/javascript" src="../libraries/sage/class.js"></script>
+			<script type="text/javascript" src="../libraries/sage/event.js"></script>
+			<script type="text/javascript" src="../libraries/sage/evented.js"></script>
+			<script type="text/javascript" src="../libraries/sage/deferred.js"></script>
+			<script type="text/javascript" src="../libraries/Base64.js"></script>
+			<script type="text/javascript" src="../libraries/ObjTree.js"></script>
+
+			<script type="text/javascript" src="../src/SDataAjax.js"></script>
+			<script type="text/javascript" src="../src/SDataUri.js"></script>
+			<script type="text/javascript" src="../src/SDataBaseRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataApplicationRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataSingleResourceRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataSystemRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataTemplateResourceRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataResourceCollectionRequest.js"></script>
+			<script type="text/javascript" src="../src/SDataService.js"></script>
+			<script type="text/javascript" src="rml.js"></script>
+			<link href="css/microTemplate.css" rel="stylesheet" type="text/css" />
+			<link href="css/sIFR-screen2.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript">
+			var etag ="", key="";		
+			//define the service.
+			var service = new Sage.SData.Client.SDataService({
+			serverName: 'localhost',
+			virtualDirectory: 'sdata',
+			applicationName: 'slx',
+			contractName: 'dynamic',
+			port: 3333,
+			protocol: /https/i.test(window.location.protocol) ? 'https' : false,
+			userName: 'lee',
+			password: ''
+			});
+			
+			//define the request, passing in the service object.
+			var request = new Sage.SData.Client.SDataSingleResourceRequest(service)
+			.setResourceKind('accounts');
+		
+		
+			function AddAccount()
+			{
+		
+				var that = this; //used for the callback.
+				var entry = {
+					$name: 'Account',
+					AccountName: dojo.byId("tab1txtAccountName").value,
+					Division: dojo.byId("tab1txtDivision").value,
+					BusinessDescription: dojo.byId("tab1txtBusDesc").value
+				};
+				request.create(entry, {
+					async: true,
+					success: function(data) {
+						that.etag= data.$etag;
+						that.key = data.$key;
+						//after I insert the account I want to select it.
+						
+						dojo.byId("lblAccountID").innerHTML = "We are working with Account:" + that.key;
+						SearchAccountbyID(that.key);
+					}
+				});				
+				
+			}
+			
+			function SearchAccountbyID(key)
+			{
+				request.setResourceSelector("'" + key + "'");
+				var that = this;
+				request.read({
+					async: true,
+					success: function(data) {
+						//my entire account that was just added comes back in data.
+						dojo.byId("tab3txtAccountName").value = data.AccountName;
+						dojo.byId("tab3txtDivision").value = data.Division;
+						dojo.byId("tab3txtBusDesc").value = data.BusinessDescription;
+						//get a hold of the tab container so I can tell it to set the pane I want.
+						var tabs = dijit.byId("tabContainer");
+						var pane = dijit.byId("Tab3"); //get the tab I want to set.
+						tabs.selectChild(pane); //set it.
+					}
+				});				
+			}
+			
+			function UpdateAccount()
+			{
+				
+				var entry = {
+					$name: 'Account',
+					$etag: etag,
+					AccountName: dojo.byId("tab3txtAccountName").value,
+					Division: dojo.byId("tab3txtDivision").value,
+					BusinessDescription: dojo.byId("tab3txtBusDesc").value
+				};
+				
+				request.update(entry, {
+					async: true,
+					success: function(data) {
+						dojo.byId("lblAccountID").innerHTML = "Account: " + data.$key + " Updated!";
+						dojo.byId("lblAccountID").style.color = "#FF0000";
+					}
+				});	
+			}
+			
+			function SearchAccounts()
+			{
+				var requestcoll = new Sage.SData.Client.SDataResourceCollectionRequest(service)
+				.setResourceKind('accounts');
+				
+				
+				var that = this;
+				var args = new Array()
+				args["where"] = 					"AccountName like '%" + dojo.byId("tab2txtAccountName").value + "%' or " +
+					"Division like '%" +  dojo.byId("tab2txtDivision").value + "%' or " +
+					"BusinessDescription like '%" + dojo.byId("tab2txtBusDesc").value + "%'";
+				requestcoll.setQueryArgs(args,true
+				);
+	
+				
+				requestcoll.read({
+					async: true,
+					success: function(data) {
+						var ehs	= "";	
+						dojo.forEach(data.$resources,function(entry)
+						{
+						//<a href="#" onclick="SearchAccountbyID('entry.$key')>entry.$Account</a>"
+							ehs += RML.a({content: entry.AccountName, onclick: "SearchAccountbyID('" + entry.$key + "')", href: "#"});
+							ehs += RML.br();
+						}//end function
+						
+						);//end for each
+						dojo.byId("AccountList").innerHTML = ehs;
+					}//end function success
+				});//end .read	
+			}
+        </script>
+    </head>
+    
+    <body class="claro">
+	<div id="headerContainer">
+  <div id="header">
+    <div id="headerUnderlay">
+      <div id="headerContent">
+       
+
+      </div>
+      <div style="clear:both">
+        <!-- Clear:both -->
+      </div>
+      <div id="sageLogo"> <img src="images/sageLogo_SDataCore.gif" alt="Sage Data Logo" usemap="#Map" />
+        <map name="Map" id="Map">
+          <area shape="rect" coords="58,2,137,78" href="default.html" alt="default" />
+        </map>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="bodyContainer">
+  <div id="contentBorderTop"></div>
+  <div id="contentBorder">
+    <div id="content">
+      <div id="contentTwoColumn">
+        <div id="contentRight">
+          <div id="visitAlso"> <img src="images/visitalso.png" alt="" />
+            <ul>
+              <li><a href="sdatacore_business.html"  class="L1">SData for your Business</a></li>
+              <li><a href="http://interop.sage.com/daisy/sdata/SDataProtocolDescription.html?branch=main&language=default" target="_blank"   class="L1">SData in Detail</a></li>
+              <li><a href="http://sdata.showcase2.sage.com/SDataForum/default.aspx?g=topics&amp;f=5" target="_blank"   class="L1">Forum</a></li>
+            </ul>
+          </div>
+          <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+        <div id="contentLeft">
+          
+
+        <div style="width: 450px; height: 300px">
+			<div id="lblAccountID"></div>
+            <div dojoType="dijit.layout.TabContainer" style="width: 100%; height: 100%;" id="tabContainer">
+                <div dojoType="dijit.layout.ContentPane" title="1. New Account" selected="true" id="Tab1">					
+                    Account Name: <input type="textbox" id="tab1txtAccountName"></input><br />
+                    Division: <input type="textbox" id="tab1txtDivision"></input><br />
+					Business Description: <input type="textbox" id="tab1txtBusDesc"></input>
+					<input type="button" onclick="AddAccount()" value="AddAccount"></button>
+                </div>
+                <div dojoType="dijit.layout.ContentPane" title="1. Existing Account" id="Tab2">
+                    Enter your search criteria:<br />
+					Account Name: <input type="textbox" id="tab2txtAccountName"></input><br />
+                    Division: <input type="textbox" id="tab2txtDivision"></input><br />
+					Business Description: <input type="textbox" id="tab2txtBusDesc"></input>
+					<input type="button" onclick="SearchAccounts()" value="Search"></button>
+					<hr />
+					<div id="AccountList">
+						
+					</div>
+                </div>
+                <div dojoType="dijit.layout.ContentPane" title="2. Update the account"  id="Tab3">
+					Account Name: <input type="textbox" id="tab3txtAccountName"></input><br />
+                    Division: <input type="textbox" id="tab3txtDivision"></input><br />
+					Business Description: <input type="textbox" id="tab3txtBusDesc"></input>
+					<input type="button" onclick="UpdateAccount()" value="Update Account"></button>
+                </div>
+            </div>
+        </div>
+         <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+        <div style="clear:both">
+          <!--clear:both-->
+        </div>
+        <div id="contentOneColCenter">
+        <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="footer">
+    <ul id="footerMenu">
+      <li><a href="http://www.sage.com/">Worldwide</a></li>
+      <li> | </li>
+      <!--<li><a href="#">Legal</a></li>
+      <li> | </li>-->
+
+      <li><a href="privacypolicy.html">Privacy Policy</a></li>
+      <li> | </li>
+      <li><a href="termsandconditions.html">Terms &amp; Conditions</a></li>
+    </ul>
+
+  </div>
+</div>
+    </body>
+
+</html>

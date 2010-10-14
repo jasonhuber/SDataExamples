@@ -26,15 +26,52 @@
 			<script type="text/javascript" src="../src/SDataResourceCollectionRequest.js"></script>
 			<script type="text/javascript" src="../src/SDataService.js"></script>
 			<script type="text/javascript" src="rml.js"></script>
+			<link href="css/microTemplate.css" rel="stylesheet" type="text/css" />
+			<link href="css/sIFR-screen2.css" rel="stylesheet" type="text/css" />
 			<script type="text/javascript" src="default.js"></script>
-
-
-		
     </head>
-    
     <body class="claro">
-        <div style="width: 380px; height: 300px">
-			<div id="lblAccountID"></div>
+	<div id="headerContainer">
+  <div id="header">
+    <div id="headerUnderlay">
+      <div id="headerContent">
+       
+
+      </div>
+      <div style="clear:both">
+        <!-- Clear:both -->
+      </div>
+      <div id="sageLogo"> <img src="images/sageLogo_SDataCore.gif" alt="Sage Data Logo" usemap="#Map" />
+        <map name="Map" id="Map">
+          <area shape="rect" coords="58,2,137,78" href="default.html" alt="default" />
+        </map>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="bodyContainer">
+  <div id="contentBorderTop"></div>
+  <div id="contentBorder">
+    <div id="content">
+      <div id="contentTwoColumn">
+        <div id="contentRight">
+          <div id="visitAlso"> <img src="images/visitalso.png" alt="" />
+            <ul>
+              <li><a href="sdatacore_business.html"  class="L1">SData for your Business</a></li>
+              <li><a href="http://interop.sage.com/daisy/sdata/SDataProtocolDescription.html?branch=main&language=default" target="_blank"   class="L1">SData in Detail</a></li>
+              <li><a href="http://sdata.showcase2.sage.com/SDataForum/default.aspx?g=topics&amp;f=5" target="_blank"   class="L1">Forum</a></li>
+            </ul>
+          </div>
+          <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+        <div id="contentLeft">
+          
+
+        <div style="width: 450px; height: 300px">
+						<div id="lblAccountID"></div>
             <div dojoType="dijit.layout.TabContainer" style="width: 100%; height: 100%;" id="tabContainer">
                 <div dojoType="dijit.layout.ContentPane" title="1. New Account" selected="true" id="Tab1">					
                     Account Name: <input type="textbox" id="tab1txtAccountName"></input><br />
@@ -62,6 +99,36 @@
                 </div>
             </div>
         </div>
+         <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+        <div style="clear:both">
+          <!--clear:both-->
+        </div>
+        <div id="contentOneColCenter">
+        <div style="clear:both">
+            <!--clear:both-->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="footer">
+    <ul id="footerMenu">
+      <li><a href="http://www.sage.com/">Worldwide</a></li>
+      <li> | </li>
+      <!--<li><a href="#">Legal</a></li>
+      <li> | </li>-->
+
+      <li><a href="privacypolicy.html">Privacy Policy</a></li>
+      <li> | </li>
+      <li><a href="termsandconditions.html">Terms &amp; Conditions</a></li>
+    </ul>
+
+  </div>
+</div>
     </body>
 
 </html>
